@@ -1,0 +1,230 @@
+---
+import Layout from "../layouts/Basic.astro";
+import OneColumn from "../components/layout/OneColumn.astro";
+import TwoColumn from "../components/layout/TwoColumn.astro";
+import Tabs from "../components/interactive/Tabs.astro";
+import ImageBlock from "../components/primitives/ImageBlock.astro";
+import Card from "../components/primitives/Card.astro";
+import softwareImage from "../assets/webp/software.webp";
+import reportsImage from "../assets/webp/reports.webp";
+import Accordion from "../components/interactive/Accordion.astro";
+import ClosingCTA from "../components/sections/ClosingCTA.astro";
+---
+
+<Layout
+  title="Our Services"
+  description="Discover Crescendo Stage's AI solutions and digital services for automating operations, streamlining workflows, and driving enterprise growth."
+>
+  <TwoColumn
+    title="AI Solutions"
+    heading="h1"
+    id="ai-solutions"
+    fullWidth={true}
+  >
+    <p slot="left">
+      Empower and streamline your operations by automating repetitive tasks such
+      as data entry, document review, exception handling and reporting. Our AI
+      solutions integrate seamlessly with your existing systems and processes,
+      freeing your team to focus on exception resolution and strategic
+      priorities.
+    </p>
+    <a href="/contact" class="btn-primary" slot="left">Learn more</a>
+    <ImageBlock
+      slot="right"
+      src={softwareImage}
+      alt=""
+      width="1359"
+      height="750"
+      loading="eager"
+      class="right-image"
+      layout="full-width"
+      priority
+    />
+  </TwoColumn>
+  <TwoColumn title="AI Configure" id="ai-configure">
+    <Tabs slot="left" />
+    <ImageBlock
+      slot="right"
+      src={reportsImage}
+      alt=""
+      width="600"
+      height="900"
+      loading="eager"
+      class="right-image"
+      layout="constrained"
+    />
+  </TwoColumn>
+  <TwoColumn title="Process Automation" id="process-automation" heading="h2">
+    <p slot="left">
+      Streamline your operations by automating repetitive tasks—data entry,
+      invoice ingestion and matching, exception handling, reporting, as it
+      learns from every decision.
+    </p>
+    <p slot="left">
+      Learn more about <a href="/kompare-iq">Kompare IQ</a> our AI-based solution
+      that automates your invoice audits by comparing your vendor agreements and
+      pricing terms against each invoice received highlighting errors before they
+      cost you money.
+    </p>
+    <p slot="left">
+      Our AI solutions integrate seamlessly with your existing systems and
+      processes, freeing your team to focus on exception resolution and
+      strategic priorities.
+    </p>
+    <Card title="Key Benefits" slot="right">
+      <ul>
+        <li>
+          Intelligent data extraction from documents such as pdf invoices and
+          contracts
+        </li>
+        <li>Automated rule-based matching and discrepancy flagging</li>
+        <li>Dynamic workflow orchestration and approval routing</li>
+        <li>Real-time dashboards and exception alerts</li>
+      </ul>
+    </Card>
+    <a href="/kompare-iq" class="btn-primary" slot="right">Explore Kompare IQ</a
+    >
+  </TwoColumn>
+  <OneColumn title="Back-End Process Support" id="back-end" heading="h2">
+    <p>
+      We provide scalable and reliable support for essential back-office
+      operations—blending AI-powered automation with trained personnel to handle
+      tasks like invoice processing, document validation, vendor coordination,
+      data entry, and reconciliation. Designed for growing companies that want
+      operational excellence without growing their headcount, this hybrid
+      approach reduces costs, increases accuracy, and provides flexible coverage
+      as your needs evolve.
+    </p>
+  </OneColumn>
+  <TwoColumn id="capabilities">
+    <h3 class="sticky-heading" slot="left">Capabilities</h3>
+    <Accordion slot="right" group="capabilities" />
+  </TwoColumn>
+  <TwoColumn id="benefits">
+    <h3 class="sticky-heading" slot="left">Benefits</h3>
+    <Accordion slot="right" group="benefits" />
+  </TwoColumn>
+  <OneColumn id="back-end2">
+    <p>
+      Whether you’re trying to manage growing volumes or streamline workflows
+      without hiring more staff, our Back-End Process Support provides the right
+      balance of technology and expert service—customized to fit your
+      operational reality.
+    </p>
+  </OneColumn>
+  <TwoColumn title="Data Analytics & Modeling" id="data-analytics" heading="h2">
+    <p slot="left">
+      Transform raw data into strategic insights with our end-to-end analytics
+      services. From exploratory data analysis to predictive forecasting, we
+      help you make data-driven decisions.
+    </p>
+    <p slot="left">
+      Whether you need on-off analytics projects or an embedded analytics
+      service, we can help you translate complexity into clarity.
+    </p>
+    <a href="/contact" class="btn-primary" slot="left">Learn more</a>
+    <Accordion slot="right" group="data-analytics" />
+  </TwoColumn>
+  <TwoColumn title="Consulting Services" id="consulting" heading="h2">
+    <p slot="left">
+      Partner with our experts to align your technology roadmap with business
+      goals. We offer strategic guidance on AI adoption, process improvement,
+      and organizational change management.
+    </p>
+    <Card title="Engagements" slot="right">
+      <ul>
+        <li>Current Process Assessment</li>
+        <li>AI Readiness Review</li>
+        <li>Governance & Compliance Frameworks</li>
+        <li>Executive Training & Knowledge Transfer</li>
+      </ul>
+    </Card>
+  </TwoColumn>
+  <ClosingCTA />
+</Layout>
+
+<style lang="scss" is:global>
+  @use "@styles" as *;
+
+  #ai-solutions {
+    background: $gradient-bg;
+    padding: 0;
+    .container {
+      flex-direction: column-reverse;
+      .right-image {
+        max-height: 250px;
+      }
+      .flex-group-col {
+        flex: 0 0 50%;
+        padding: 2rem $gutter;
+        align-items: flex-start;
+      }
+      @include container-query(small-laptop) {
+        flex-direction: row;
+        .right-image {
+          max-height: 100%;
+        }
+      }
+    }
+  }
+  #ai-configure {
+    background-color: $off-white-bg;
+    .right-side {
+      display: none;
+      flex: 0 0 50%;
+      img {
+        box-shadow: $drop-shadow;
+        border-radius: 0.5rem;
+      }
+    }
+    @include container-query(small-laptop) {
+      .right-side {
+        display: block;
+      }
+    }
+  }
+  #process-automation {
+    background-color: $light;
+    .right-side {
+      @include flex-group-col;
+    }
+  }
+  #back-end,
+  #capabilities,
+  #benefits,
+  #back-end2 {
+    background-color: $white-bg;
+  }
+  #back-end {
+    .flex-group-col {
+      align-items: flex-start;
+    }
+  }
+  #capabilities,
+  #benefits {
+    .left-side {
+      flex: 0 0 25%;
+    }
+    .rifght-side {
+      flex: 0 0 75%;
+    }
+  }
+  #data-analytics,
+  #consulting {
+    .left-side {
+      flex: 0 0 55%;
+    }
+    .right-side {
+      flex: 0 0 45%;
+    }
+  }
+  #data-analytics {
+    background-color: $off-white-bg;
+    .left-side {
+      flex: 0 0 55%;
+    }
+    .right-side {
+      flex: 0 0 45%;
+    }
+  }
+</style>

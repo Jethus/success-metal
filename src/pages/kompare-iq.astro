@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Basic.astro";
+import TwoColumn from "../components/layout/TwoColumn.astro";
+import ImageBlock from "../components/primitives/ImageBlock.astro";
+import abstractImage from "../assets/webp/abstract-poly.webp";
+import List from "../components/interactive/List.astro";
+import ClosingCTA from "../components/sections/ClosingCTA.astro";
+---
+
+<Layout
+  title="Kompare IQ"
+  description="Explore Kompare IQ, our AI-powered invoice audit solution that automates contract comparison, flags discrepancies, and ensures compliance."
+>
+  <TwoColumn title="Kompare IQ" heading="h1" id="kompare-iq" fullWidth={true}>
+    <p slot="left">
+      Kompare IQ is an AI-based solution built to automate your invoice audits
+      by directly comparing your contracts (such as service-level agreements)
+      and pre-established pricing terms against each invoice received from your
+      suppliers. It flags discrepancies, billing errors, and compliance
+      issues—so you catch costly mistakes before they impact your bottom line.
+      Kompare IQ uses advanced natural language processing to interpret contract
+      terms and AI to compare them against incoming invoices.
+    </p>
+    <a href="/contact" class="btn-primary" slot="left">Book a Demo</a>
+    <ImageBlock
+      slot="right"
+      src={abstractImage}
+      alt=""
+      width="1359"
+      height="750"
+      loading="eager"
+      class="right-image"
+      layout="full-width"
+      priority
+    />
+  </TwoColumn>
+  <TwoColumn id="kompare-features">
+    <h3 class="sticky-heading" slot="left">Key Features</h3>
+    <List slot="right" group="kompare-features" />
+  </TwoColumn>
+  <TwoColumn id="kompare-benefits">
+    <h3 class="sticky-heading" slot="left">Benefits</h3>
+    <List slot="right" group="kompare-benefits" />
+  </TwoColumn>
+  <ClosingCTA
+    title="Free Proof-of Concept"
+    description="Experience Kompare IQ risk-free. Provide a sample contract and invoice set, and we’ll demonstrate live savings and time savings—on us."
+    cta="Book a Demo"
+  />
+</Layout>
+
+<style lang="scss" is:global>
+  @use "@styles" as *;
+
+  #kompare-iq {
+    background: $gradient-bg;
+    padding: 0;
+    .container {
+      .flex-group-col {
+        flex: 0 0 50%;
+        padding: 2rem;
+      }
+    }
+  }
+  #kompare-features,
+  #kompare-benefits {
+    .left-side {
+      flex: 0 0 25%;
+    }
+    .right-side {
+      flex: 1 1 75%;
+    }
+  }
+</style>

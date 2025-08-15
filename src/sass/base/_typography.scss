@@ -1,0 +1,131 @@
+@use "../foundation/index" as *;
+
+/* Fonts and general styles */
+/* lato-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/lato-v24-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-900 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/lato-v24-latin-900.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* noto-sans-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/noto-sans-v39-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* noto-sans-500 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/noto-sans-v39-latin-500.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+body,
+p,
+li,
+textarea,
+input,
+select,
+button,
+th,
+td {
+  font-size: var(--font-size-base);
+}
+
+h1,
+.h1 {
+  font-size: var(--font-size-xxxl);
+  font-weight: $black;
+}
+
+h2,
+.h2 {
+  font-size: var(--font-size-xxl);
+}
+
+h3,
+.h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4,
+.h4 {
+  font-size: var(--font-size-lg);
+}
+
+h5,
+.h5 {
+  font-size: var(--font-size-md);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @include header-style;
+  line-height: $line-height;
+}
+
+a:not([class*="btn"]):not([class*="logo"]) {
+  color: $brand-action;
+  text-decoration: none;
+  position: relative;
+  @include transition-fast(color);
+  &:hover {
+    color: $brand-primary;
+    &::before {
+      transform-origin: left;
+      transform: scaleX(1);
+    }
+  }
+  &:focus-visible {
+    outline: 2px solid $brand-action;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: $brand-primary;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+}
+
+ul {
+  padding-left: 2.5rem;
+  li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.sticky-heading {
+  position: sticky;
+  top: calc(120px + 2rem); // Mindful of nav
+  z-index: 2;
+  background: inherit;
+  @include container-query(tablets) {
+    top: calc(120px + 3rem);
+  }
+}

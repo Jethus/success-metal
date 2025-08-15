@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import arrow from "../../assets/png/arrow.png";
+import book from "../../assets/png/book.png";
+import clock from "../../assets/png/clock.png";
+import invoice from "../../assets/png/invoice.png";
+---
+
+<section id="solutions" aria-labelledby="solutions-heading">
+  <div class="container">
+    <h2 id="solutions-heading">Built for accuracy. Designed for efficiency.</h2>
+    <p>
+      Our AI solutions integrate seamlessly with your existing systems and
+      processes, freeing your team to focus on exception resolution and
+      strategic priorities.
+    </p>
+    <ul class="service-cards">
+      <li class="card">
+        <h3>Proven Expertise</h3>
+        <p>
+          Deploy our cloud-based or on premise AI solutions in days, not months
+          by using our pre-configured solutions to deliver rapid solutions at
+          competitive costs.
+        </p>
+        <Image
+          src={invoice}
+          alt=""
+          width={500}
+          height={350}
+        />
+      </li>
+      <li class="card">
+        <h3>Scalable & Flexible</h3>
+        <p>
+          We deploy only what you need and when you need it, ensuring that you
+          get a return on your investment in each step of your automation
+          journey.
+        </p>
+        <Image
+          src={arrow}
+          alt=""
+          width={500}
+          height={350}
+        />
+      </li>
+      <li class="card">
+        <h3>Domain Knowledge</h3>
+        <p>
+          We blend domain knowledge with cutting-edge AI-Solutions to solve
+          critical business challenges.
+        </p>
+        <Image
+          src={book}
+          alt=""
+          width={540}
+          height={350}
+        />
+      </li>
+      <li class="card">
+        <h3>Quick Processing</h3>
+        <p>
+          Automated data capture and workflows cut processing time, helping your
+          teams close the books faster and improve cash-flow visibility.
+        </p>
+        <Image
+          src={clock}
+          alt=""
+          width={500}
+          height={350}
+        />
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles" as *;
+
+  #solutions {
+    background: $off-white-bg;
+    .container {
+      .service-cards {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+        list-style-type: none;
+        padding: 0;
+        @include container-query(tablets) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @include container-query(large-laptop) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+          display: grid;
+          grid-template-rows: auto 1fr minmax(250px, 320px);
+          background-color: $light;
+          border-radius: 8px;
+          padding: 1rem 1rem 0;
+          gap: 1rem;
+          overflow: hidden;
+          box-shadow: $drop-shadow;
+          border-left: 4px solid $brand-primary;
+          h3 {
+            color: $brand-primary;
+          }
+          img {
+            width: calc(100% + 4rem);
+            object-fit: cover;
+            object-position: top center;
+            margin: 0 -2rem;
+          }
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+type Props = CollectionEntry<"services">["data"];
+
+const { heading, image, order } = Astro.props as Props;
+---
+
+<div class={`service-item${order % 2 === 0 ? " flipped" : ""}`}>
+  <div class="flex-group-col">
+    <h3>{heading}</h3>
+    <slot />
+  </div>
+  <Image
+    src={image}
+    class="service-image"
+    alt=""
+    width={640}
+    height={360}
+    loading="lazy"
+  />
+</div>
+
+<style lang="scss">
+  @use "@styles" as *;
+  .service-item {
+    display: flex;
+    padding-inline: .5rem;
+    gap: 2rem;
+    justify-content: space-evenly;
+    flex-wrap: wrap-reverse;
+    &.flipped {
+      flex-direction: row-reverse;
+    }
+    .flex-group-col {
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    @include container-query(tablets) {
+      padding-inline: 2rem;
+      gap: 4rem;
+      flex-wrap: nowrap;
+    }
+    .service-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 10rem;
+      @include transition-fast(max-height);
+      @include container-query(large-mobile) {
+        max-height: 14rem;
+      }
+      @include container-query(tablets) {
+        flex: 0 0 50%;
+        max-height: 18em;
+      }
+      @include container-query(small-laptop) {
+        max-height: 22rem;
+      }
+    }
+  }
+</style>

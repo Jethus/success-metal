@@ -1,0 +1,57 @@
+---
+export type Props = {
+  title?: string;
+  heading?: "h1" | "h2";
+  id: string;
+  reverse?: boolean;
+  fullWidth?: boolean;
+};
+
+const { title, heading, id, reverse = false, fullWidth = false } = Astro.props;
+---
+
+<section id={id} class={`two-col ${reverse ? "reverse" : ""}`}>
+  <div class={`container ${fullWidth ? "full-width" : ""}`}>
+    <div class="flex-group-col left-side">
+      {title && heading === "h1" && <h1>{title}</h1>}
+      {title && heading === "h2" && <h2>{title}</h2>}
+      <slot name="left" />
+    </div>
+    <div class="right-side">
+      <slot name="right" />
+    </div>
+  </div>
+
+  <style lang="scss">
+    @use "@styles" as *;
+
+    .two-col {
+      &.reverse {
+        .container {
+          flex-direction: row-reverse;
+        }
+      }
+      .container {
+        flex-direction: column;
+        .flex-group-col {
+          align-items: flex-start;
+          justify-content: flex-start;
+          h1 {
+            font-size: var(--font-size-xxxl);
+            line-height: 1.4;
+            font-weight: $black;
+            color: $brand-primary;
+          }
+          p {
+            font-size: var(--font-size-md);
+          }
+        }
+      }
+      @include container-query(tablets) {
+        .container {
+          flex-direction: row;
+        }
+      }
+    }
+  </style>
+</section>

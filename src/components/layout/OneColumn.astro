@@ -1,0 +1,23 @@
+---
+export type Props = {
+  title?: string;
+  heading?: "h1" | "h2";
+  id: string;
+};
+
+const { title, heading, id } = Astro.props;
+---
+
+<section id={id}>
+  <div class="container">
+    <div class="flex-group-col">
+      {title && heading === "h1" && <h1>{title}</h1>}
+      {title && heading === "h2" && <h2>{title}</h2>}
+      <slot />
+    </div>
+  </div>
+
+  <style lang="scss">
+    @use "@styles" as *;
+  </style>
+</section>

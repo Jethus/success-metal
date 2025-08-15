@@ -1,0 +1,72 @@
+---
+---
+
+<form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" class="contact-form" netlify-honeypot="bot-field" action="/contact-success">
+  <input type="hidden" name="form-name" value="contact" />
+  <div style="display:none;">
+    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+  </div>
+  <div class="input-area">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+  <div class="input-area">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+  </div>
+  <div class="input-area">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+  </div>
+  <!-- Netlify reCAPTCHA widget -->
+  <div class="recaptcha">
+    <div data-netlify-recaptcha="true"></div>
+  </div>
+  <button class="btn-primary" type="submit">Send</button>
+</form>
+
+<style lang="scss">
+@use "@styles" as *;
+@use "sass:color";
+
+.contact-form {
+  @include flex-group-col;
+  margin: 0 auto;
+  gap: 2rem;
+  background: $off-white-bg;
+  border-radius: 8px;
+  box-shadow: $drop-shadow;
+  padding: 2rem;
+  align-items: flex-start;
+  max-width:600px;
+
+  .input-area {
+    width: 100%;
+  }
+  label {
+    font-family: $header-font;
+    font-weight: $bold;
+    font-size: var(--font-size-base-md);
+    color: $brand-primary;
+    margin-bottom: 0.5rem;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba($brand-primary, 0.2);
+    border-radius: 4px;
+    font-size: var(--font-size-base-md, 1rem);
+    font-family: "Noto Sans", Arial, sans-serif;
+    background: $white-bg;
+    color: $brand-text;
+    transition: border-color 0.2s;
+    &:focus {
+      border-color: $brand-action;
+      outline: none;
+    }
+  }
+  .recaptcha {
+    margin-top: 1rem;
+  }
+}
+</style>

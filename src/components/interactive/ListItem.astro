@@ -1,0 +1,40 @@
+---
+const { heading, ...rest } = Astro.props;
+---
+
+<div class="list-item" {...rest}>
+  <div class="list-summary">
+    <slot name="summary">{heading}</slot>
+  </div>
+  <div class="list-panel">
+    <div class="list-content">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "@styles" as *;
+
+  .list-summary {
+    width: 100%;
+    text-align: left;
+    font-family: $body-font;
+    font-size: var(--font-size-base-md);
+    font-weight: $medium;
+    color: $brand-primary;
+    padding: 1.75rem 1rem;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .list-panel {
+    border-bottom: 2px solid rgba($brand-primary, 0.25);
+    padding: 0 1rem;
+    .list-content {
+      padding: 1rem;
+    }
+  }
+</style>

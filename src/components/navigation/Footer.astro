@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import logo from "../../assets/svgs/CS-logo.svg";
+const today = new Date();
+---
+
+<footer>
+  <div class="flex-group-row">
+    <a href="/" class="logo" aria-label="Crescendo Stage">
+      <Image
+        loading="lazy"
+        src={logo}
+        alt="Crescendo Stage"
+        width={515}
+        height={100}
+      />
+    </a>
+    <ul class="footer-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+    </ul>
+  </div>
+  <p>&copy; {today.getFullYear()} Crescendo Stage. All rights reserved.</p>
+  <p>Designed & Coded by <a href="https://pixelboost.ca">Pixelboost</a>.</p>
+</footer>
+<style lang="scss">
+  @use "@styles" as *;
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 0;
+    background-color: $light;
+    color: $dark;
+    text-align: center;
+    padding-inline: $gutter;
+    .flex-group-row {
+      gap: 0;
+      width: 100%;
+      justify-content: center;
+      flex-direction: column;
+      align-items: flex-start;
+      .logo {
+        height: 100px;
+        margin-bottom: 1rem;
+        img {
+          width: 100%;
+          height: 100px;
+        }
+      }
+    }
+    .footer-links {
+      font-size: var(--font-size-md);
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-bottom: 1rem;
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+    }
+    @include container-query(large-mobile) {
+      .flex-group-row {
+        .logo {
+          height: 80px;
+          img {
+            height: 80px;
+          }
+        }
+      }
+    }
+    @include container-query(tablets) {
+      .flex-group-row {
+        gap: 4rem;
+        flex-direction: row;
+        align-items: center;
+        .logo {
+          height: 80px;
+          img {
+            height: 80px;
+          }
+        }
+      }
+    }
+  }
+</style>

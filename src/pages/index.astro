@@ -1,0 +1,27 @@
+---
+import BaseHead from "../components/navigation/BaseHead.astro";
+import Header from "../components/navigation/Header.astro";
+import Footer from "../components/navigation/Footer.astro";
+import ClosingCTA from "../components/sections/ClosingCTA.astro";
+import Hero from "../components/sections/Hero.astro";
+import Solutions from "../components/sections/Solutions.astro";
+import Services from "../components/sections/Services.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <Hero />
+      <Solutions />
+      <Services />
+    </main>
+    <ClosingCTA />
+    <Footer />
+  </body>
+</html>

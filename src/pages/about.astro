@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Basic.astro";
+import OneColumn from "../components/layout/OneColumn.astro";
+import TwoColumn from "../components/layout/TwoColumn.astro";
+import ImageBlock from "../components/primitives/ImageBlock.astro";
+import ClosingCTA from "../components/sections/ClosingCTA.astro";
+import abstractImage from "../assets/webp/abstract-poly.webp";
+---
+
+<Layout title="About Us" description="Learn about Crescendo Stage, our mission, values, founders, and commitment to innovation, integrity, and collaboration in digital transformation.">
+	<TwoColumn
+    title="About Us"
+	heading="h1"
+    id="about-hero"
+    fullWidth={true}
+  >
+    <p slot="left">
+		We believe the future is being built where the intersection of digital technologies and human expertise will empower solutions that will redefine what’s possible.
+	</p>
+    <ImageBlock
+      slot="right"
+      src={abstractImage}
+      alt=""
+      width="1359"
+      height="750"
+      loading="eager"
+      class="right-image"
+      layout="full-width"
+      priority
+    />
+  </TwoColumn>
+  <OneColumn
+    title="about"
+    id="about">
+	<h2>Our Mission</h2>
+	<p>Our mission is to help our clients transform complex operational challenges into streamlined, actionable data-driven solutions that drive digital innovation, efficiency and result in incremental returns. Our approach is to combine the right mix of human expertise and technology, tailoring each solution for every unique business. </p>
+    <h2>Our Values</h2>
+    <ul>
+      <li><strong>Results.</strong> We believe incremental and sustainable results are the launchpads of big leaps. We pursue a disciplined climb where every stage is better than the last.</li>
+      <li><strong>Innovation.</strong> Our approach to innovation is based on creative thinking, domain knowledge, technical skill, and data-driven insights to solve business challenges. We believe big transformations are based on a chain of incremental innovations.</li>
+      <li><strong>Integrity.</strong> We believe that upholding rigorous standards of data privacy, security, and ethical AI use are basic business principles that must be followed always.</li>
+      <li><strong>Transparency.</strong> Clear communication and auditability at every step are the foundations of transparency.</li>
+      <li><strong>Simplicity.</strong> We believe that simplification results in faster and lower cost execution. That’s how we get things done.</li>
+      <li><strong>Collaboration.</strong> Our belief is that building partnerships that foster shared success is the foundation of all our business interactions.</li>
+    </ul>
+
+    <h2>Founders</h2>
+    <p>Our founders combined bring over five decades of extensive leadership experience in banking and financial services, with a proven track record leveraging expertise and advanced analytics and modeling to deliver scalable solutions across North America and beyond. As seasoned risk strategists and consultants, their deep domain knowledge in credit, fraud and operational risk ensures that our solutions not only drive growth but also uphold the highest standards of governance and compliance.</p>
+    <p>Our Founders are talented individuals who bring experience from some of the most internationally recognized companies and start-ups.</p>
+
+    <h2>Strategic Partners</h2>
+    <p>We are proud to be a strategic partner of a trusted AI & ML innovator founded in 2012. With a global team of over 120 AI and advanced data engineers specializing in AI strategy development, generative AI solutions, predictive analytics, and data engineering services. Together, we combine local domain expertise in multiple industries with the support of a leading edge AI powerhouse to deliver end-to-end solutions that drive measurable business outcomes.</p>
+</OneColumn>
+
+  <ClosingCTA
+    title="Ready to empower and transform your business?"
+    description="Reach out today for a free consultation or to request a demo of our AI solutions."
+  />
+</Layout>
+
+<style lang="scss" is:global>
+  @use "@styles" as *;
+  #about-hero {
+	background: $gradient-bg;
+  	padding: 0;
+	.container {
+	  flex-direction: column-reverse;
+	  .right-image {
+		max-height: 250px;
+	  }
+    .flex-group-col {
+      flex: 0 0 50%;
+      padding: 2rem $gutter;
+	  align-items:flex-start;
+    }
+	@include container-query(small-laptop) {
+		flex-direction:row;
+		.right-image {
+			max-height: 100%;
+		}
+	}
+  }
+}
+  
+  #about {
+	.flex-group-col {
+		align-items: flex-start;
+	}
+  }
+</style>

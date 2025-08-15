@@ -1,0 +1,26 @@
+---
+const { title, ...rest } = Astro.props;
+---
+
+<div class="tab-item" {...rest}>
+  <slot />
+</div>
+
+<style lang="scss">
+  @use "@styles" as *;
+  .tab-item {
+    @include flex-group-col;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    align-items: flex-start;
+    @include transition-slow(opacity);
+  }
+  .tab-item.active {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+    pointer-events: auto;
+  }
+</style>

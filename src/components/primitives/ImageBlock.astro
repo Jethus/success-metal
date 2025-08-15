@@ -1,0 +1,19 @@
+---
+import { Picture } from "astro:assets";
+type PictureProps = Parameters<typeof Picture>[0];
+const props = Astro.props as PictureProps;
+---
+
+<Picture {...props} />
+
+<style lang="scss">
+  @use "@styles" as *;
+
+  picture {
+    display: flex;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+</style>

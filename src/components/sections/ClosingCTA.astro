@@ -1,0 +1,94 @@
+---
+import ImageBlock from "../primitives/ImageBlock.astro";
+import closingCta from "../../assets/svgs/closing-cta.svg";
+---
+
+<section id="ClosingCTA">
+  <div class="container full-width">
+    <div class="flex-group-col">
+      <h2 class="title">
+        {Astro.props.title ?? "Ready to elevate your business?"}
+      </h2>
+      <p>
+        {
+          Astro.props.description ??
+            "Book a free discovery session with no strings attached."
+        }
+      </p>
+      <a class="btn-secondary" href={Astro.props.link ?? "/contact"}>
+        {Astro.props.cta ?? "Contact Us"}
+      </a>
+    </div>
+    <ImageBlock
+      src={closingCta}
+      class="cta-image"
+      alt=""
+      width={910}
+      height={600}
+      loading="lazy"
+    />
+
+    <style lang="scss">
+      @use "@styles" as *;
+
+      #ClosingCTA {
+        background-color: $brand-action;
+        padding: 0;
+        .container {
+          flex-direction: row;
+          .flex-group-col {
+            flex: 1 1 100%;
+            padding: 2rem $gutter;
+            justify-content: center;
+            align-items: flex-start;
+            .title {
+              color: $light;
+              font-size: var(--font-size-xxxl);
+            }
+            p {
+              color: rgba($light, 0.7);
+            }
+            .btn-secondary {
+              max-width: 100%;
+              @include transition-fast(max-width);
+            }
+          }
+          .cta-image {
+            display: none;
+            object-position: left;
+          }
+        }
+        @include container-query(tablets) {
+          background: linear-gradient(
+            to right,
+            $brand-action 0%,
+            $brand-action 62.5%,
+            $light 62.5%,
+            $light 100%
+          );
+          .container {
+            .flex-group-col {
+              flex: 0 0 50%;
+              padding: 4rem 0 2rem 2rem;
+              .btn-secondary {
+                max-width: 70%;
+              }
+            }
+            .cta-image {
+              display: block;
+            }
+          }
+        }
+        @include container-query(large-laptop) {
+          .container {
+            .flex-group-col {
+              .btn-secondary {
+                max-width: 60%;
+              }
+            }
+          }
+        }
+      }
+    </style>
+  </div>
+</section>

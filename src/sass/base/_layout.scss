@@ -1,0 +1,66 @@
+@use "../foundation/index" as *;
+:root {
+  @include fluid-font-sizes;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  container-type: inline-size;
+}
+
+body,
+html {
+  @include body-style;
+  margin: 0;
+  padding: 0;
+  color: $brand-text;
+  overflow-x: clip;
+}
+
+/* Remove tap highlight color on mobile */
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2/4;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: auto;
+  padding-inline: $gutter;
+  @include container-query(desktop) {
+    padding-inline: 0;
+  }
+  &.full-width {
+    grid-column: 2/-1;
+    padding-inline: 0;
+  }
+}
+
+main > section:first-child {
+  padding-block-start: 0;
+}
+
+section {
+  padding-block: $section-space;
+  display: grid;
+  grid-template-columns:
+    1fr minmax(0, calc($content-width / 2)) minmax(0, calc($content-width / 2))
+    1fr;
+  @include container-query(small-laptop) {
+    padding: 4rem 2rem;
+  }
+  @include container-query(desktop) {
+    padding: 4rem 0;
+  }
+}

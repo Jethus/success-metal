@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from "astro:content";
+import AccordionItem from "./AccordionItem.astro";
+
+const group = Astro.props.group;
+
+const accordionSorted = (await getCollection("lists"))
+  .filter(item => item.data.group === group)
+  .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity));
+
+const rendered = await Promise.all(
+  accordionSorted.map(async (item) => {
+    const { Content } = await render(item);
+    return { data: item.data, Content };
+  })
+);
+---
+
+<div class="accordion">
+  {
+    rendered.map(({ data, Content }) => (
+      <AccordionItem {...data}>
+        <Content />
+      </AccordionItem>
+    ))
+  }
+</div>
+
+<script is:inline define:vars={{group}}>
+  document.getElementById(group)
+  .querySelectorAll('.accordion-summary').forEach(button => {
+    button.addEventListener('click', function() {
+      const panel = this.nextElementSibling;
+      const isOpen = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!isOpen));
+      panel.classList.toggle('open', !isOpen);
+      if (!isOpen) {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } else {
+        panel.style.maxHeight = null;
+      }
+    });
+  });
+</script>
+
+<!-- 
+This is the more performative version of the script, global, but less specific
+<script>
+  document.querySelectorAll('.accordion-summary').forEach(button => {
+    button.addEventListener('click', function(this: HTMLButtonElement) {
+      const panel = this.nextElementSibling as HTMLElement;
+      const isOpen = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!isOpen));
+      panel.classList.toggle('open', !isOpen);
+      if (!isOpen) {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } else {
+        panel.style.maxHeight = "";
+      }
+    });
+  });
+</script> -->

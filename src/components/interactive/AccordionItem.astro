@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets"
+import Plus from "../../assets/svgs/plus.svg";
+const { heading, group, order, ...rest } = Astro.props;
+const buttonId = `${group}-btn-${order}`;
+const panelId = `${group}-panel-${order}`;
+---
+
+<div class="accordion-item" {...rest}>
+
+    <button
+    id={buttonId}
+    class="accordion-summary"
+    aria-expanded="false"
+    aria-controls={panelId}
+    type="button"
+    >
+    <slot name="summary">{heading}</slot>
+    <Plus width={48} height={48} />
+    </button>
+    <div
+      id={panelId}
+      class="accordion-panel"
+      role="region"
+      aria-labelledby={buttonId}
+    >
+    <div class="accordion-content">
+      <slot />
+    </div>
+</div>
+</div>
+
+<style lang="scss">
+  @use "@styles" as *;
+  @use "sass:color";
+  
+  .accordion-summary {
+    width: 100%;
+    text-align: left;
+    font-family: $body-font;
+    font-size: var(--font-size-base-md);
+    font-weight: $medium;
+    padding: 1.75rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include transition-slow(background);
+    svg {
+      @include transition-slow(transform);
+    }
+  &:has(~ .open) {
+    svg {
+      transform: rotate(135deg);
+    }
+  }
+    &:hover,
+    &:focus-visible {
+      background-color: color.scale($off-white-bg, $lightness: -10%);
+    }
+  }
+  .accordion-panel {
+    max-height: 0;
+    border-bottom: 2px solid rgba($brand-primary, 0.25);
+    pointer-events: none;
+    padding: 0 1rem;
+    overflow: hidden;
+    @include transition-slow(max-height);
+    & .accordion-content {
+      @include transition-slow(opacity);
+      opacity: 0;
+      padding: 1rem;
+    }
+  }
+  .accordion-panel.open {
+    pointer-events: auto;
+    & .accordion-content {
+      opacity: 1;
+    }
+  }
+</style>
+
+
+
+

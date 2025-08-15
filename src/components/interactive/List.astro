@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import ListItem from "./ListItem.astro";
+
+const group = Astro.props.group;
+
+const listSorted = (await getCollection("lists"))
+  .filter(item => item.data.group === group)
+  .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity));
+
+const rendered = await Promise.all(
+  listSorted.map(async (item) => {
+    const { Content } = await render(item);
+    return { data: item.data, Content };
+  })
+);
+---
+
+<div class="list">
+  {
+    rendered.map(({ data, Content }) => (
+      <ListItem {...data}>
+        <Content />
+      </ListItem>
+    ))
+  }
+</div>

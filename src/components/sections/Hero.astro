@@ -1,0 +1,107 @@
+---
+import ImageBlock from "../primitives/ImageBlock.astro"
+import heroImage from "../../assets/svgs/hero.svg"
+---
+
+<section id="hero">
+  <div class="container">
+    <div class="flex-group-col">
+      <h1>
+        Empowering enterprise growth with intelligent <span
+          >digital automation</span
+        >
+      </h1>
+      <p>
+        Streamline your operations by automating repetitive tasks such as data
+        entry, document review, exception handling and reporting.
+      </p>
+      <div class="flex-group-row">
+        <a href="/contact " class="btn-primary">Book a Demo</a>
+        <a href="/services" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+    <ImageBlock
+      priority
+      class="hero-image"
+      src={heroImage}
+      width={1343}
+      height={972}
+      alt=""
+    />
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles" as *;
+
+  #hero {
+    container-type: inline-size;
+    background: $gradient-bg;
+    .container {
+      max-width: 1600px;
+      flex-direction: column-reverse;
+    }
+    .flex-group-col {
+      justify-content: center;
+      h1 {
+        font-size: var(--font-size-xxxl);
+        line-height: 1.4;
+        font-weight: $black;
+        color: $brand-primary;
+        span {
+          color: $brand-action;
+          white-space: nowrap;
+        }
+      }
+      p {
+        font-size: var(--font-size-md);
+      }
+      .flex-group-row {
+        display: flex;
+        gap: 1.25rem;
+        width: 100%;
+        flex-direction: column;
+      }
+    }
+    .hero-image {
+      pointer-events: none;
+      user-select: none;
+      transform: translate(10vw, -5%);
+      position: absolute;
+      opacity: 0.25;
+      z-index: -1;
+      max-height: 450px;
+      width: auto;
+    }
+    @include container-query(large-mobile) {
+      .flex-group-col {
+        .flex-group-row {
+          flex-direction: row;
+        }
+      }
+      .hero-image {
+        transform: translate(40vw, -5%);
+        position: absolute;
+        opacity: 0.25;
+        z-index: -1;
+      }
+    }
+    @include container-query(small-laptop) {
+      .container {
+        flex-direction: row;
+      }
+      align-items: center;
+
+      .flex-group-col {
+        flex: 0 0 50%;
+      }
+      .hero-image {
+        transform: translate(-3vw, -5%);
+        z-index: 0;
+        opacity: 1;
+        position: relative;
+        max-height: 100%;
+      }
+    }
+  }
+</style>
