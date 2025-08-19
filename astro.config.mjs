@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://crescendostage.com",
+  site: "https://success-metal.com",
   integrations: [mdx(), sitemap()],
   vite: {
     resolve: { alias: { "@styles": "/src/sass/foundation/_index.scss" } },
