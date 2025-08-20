@@ -1,30 +1,31 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../../assets/svgs/CS-logo.svg";
+import logo from "../../assets/svgs/success-metal-logo.svg";
 const today = new Date();
 ---
 
 <footer>
   <div class="flex-group-row">
-    <a href="/" class="logo" aria-label="Crescendo Stage">
+    <a href="/" class="logo" aria-label="Success Metal Manufacturing">
       <Image
         loading="lazy"
         src={logo}
-        alt="Crescendo Stage"
+        alt="Success Metal Manufacturing"
         width={515}
         height={100}
       />
     </a>
     <ul class="footer-links">
+      <li><a href="/gallery">Gallery</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/services">Services</a></li>
       <li><a href="/contact">Contact Us</a></li>
-      <li><a href="/privacy">Privacy Policy</a></li>
     </ul>
   </div>
-  <p>&copy; {today.getFullYear()} Crescendo Stage. All rights reserved.</p>
+  <p>&copy; {today.getFullYear()} Success Metal Manufacturing. All rights reserved.</p>
   <p>Designed & Coded by <a href="https://pixelboost.ca">Pixelboost</a>.</p>
 </footer>
+
 <style lang="scss">
   @use "@styles" as *;
   footer {
@@ -33,8 +34,8 @@ const today = new Date();
     justify-content: center;
     flex-direction: column;
     padding: 2rem 0;
-    background-color: $light;
-    color: $dark;
+    background-color: $dark;
+    color: $light;
     text-align: center;
     padding-inline: $gutter;
     .flex-group-row {

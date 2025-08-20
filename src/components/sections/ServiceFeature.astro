@@ -1,0 +1,88 @@
+---
+import { type CollectionEntry } from "astro:content";
+import ImageBlock from "../primitives/ImageBlock.astro";
+
+type Props = CollectionEntry<"services">["data"];
+
+const { heading, image, order, specs } = Astro.props as Props;
+---
+
+<div class={`service-feature${order % 2 === 0 ? " flipped secondary-bg" : ""}`}>
+  <div class="flex-group-col">
+    <h3>{heading}</h3>
+    <slot />
+    {specs.length > 0 && (
+      <ul class="specs-list">
+        {specs.map((spec) => (
+          <li>
+            <span class="spec-value">{spec.value}</span>
+            <span class="spec-label">{spec.label}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+  <ImageBlock
+    src={image}
+    class="service-image"
+    alt=""
+    width={2000}
+    height={2000}
+    loading="lazy"
+  />
+</div>
+
+<style lang="scss">
+  @use "@styles" as *;
+  .service-feature {
+    display: flex;
+    background-color: $main-bg;
+    list-style: none;
+    width: 100%;
+    &.flipped {
+      flex-direction: row-reverse;
+    }
+    &.secondary-bg {
+      background-color: $secondary-bg;
+    }
+    .flex-group-col {
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.5rem;
+      flex: 0 0 60%;
+      padding-left: 240px;
+       .specs-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+    .spec-value {
+      font-size: var(--font-size-lg);
+      font-family: $header-font;
+      font-weight: $bold;
+      color: $brand-primary;
+    }
+    .spec-label {
+      font-size: var(--font-size-md);
+      color: $light;
+    }
+  }
+    }
+    picture {
+      width: 100%;
+      .service-image {
+        max-height: 600px;
+        object-position: 0 top;
+      }
+    }
+ 
+}
+</style>

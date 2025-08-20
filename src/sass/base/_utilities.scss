@@ -1,4 +1,4 @@
-@use "../foundation/index" as *;
+@use '../foundation/index' as *;
 
 .fade-in {
   @include fade-in;
@@ -23,7 +23,8 @@
 }
 
 .flex-text {
-  @include flex-group-col;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 

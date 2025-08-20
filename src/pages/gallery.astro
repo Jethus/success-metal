@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Basic.astro";
+import OneColumn from "../components/layout/OneColumn.astro";
+import { LightGallery } from 'astro-lightgallery';
+import ClosingCTA from "../components/sections/ClosingCTA.astro";
+
+const galleryImages = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>("../assets/gallery/*.{jpg,png,webp}", { eager: true })
+).map((mod) => mod.default);
+---
+
+<Layout
+  title="Our Work"
+  description="View our projects"
+>
+  <OneColumn title="Gallery" heading="h1" id="gallery" >
+    <p>
+      Explore our gallery to see examples of our precision fabrication and custom metalwork. Each image showcases our commitment to quality, advanced technology, and attention to detail across a range of projects. Discover how our expertise brings ideas to life for clients in Ontario and beyond.
+    </p>
+    <LightGallery
+      layout={{
+        imgs: galleryImages.map(img => ({ src: img.src, width: img.width, height: img.height }))
+      }}
+      options={{
+        thumbnail: true,
+      }}
+    >
+    </LightGallery>
+  </OneColumn>
+  <ClosingCTA/>
+</Layout>
+
+<style lang="scss" is:global>
+  @use "@styles" as *;
+  #gallery {
+    padding-top: 4rem;
+    background: $gradient-bg;
+    .flex-group-col {
+      align-items: flex-start;
+    }
+    .astro-lightgallery-adaptive-item {
+      $smooth: 4px;
+      position: relative;
+        @include transition-fast(transform);
+      img {
+        border-radius: $smooth;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        border-radius: $smooth;
+        @include transition-fast(background-color);
+        z-index: 1;
+        pointer-events: none;
+      }
+      &:hover {
+        transform: scale(1.05);
+        &::after {
+          background-color: rgba($brand-action, 0.3);
+        }
+      }
+    }
+  }
+</style>

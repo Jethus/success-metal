@@ -4,7 +4,6 @@ import OneColumn from "../components/layout/OneColumn.astro";
 import TwoColumn from "../components/layout/TwoColumn.astro";
 import ImageBlock from "../components/primitives/ImageBlock.astro";
 import ClosingCTA from "../components/sections/ClosingCTA.astro";
-import abstractImage from "../assets/webp/abstract-poly.webp";
 ---
 
 <Layout title="About Us" description="Learn about Crescendo Stage, our mission, values, founders, and commitment to innovation, integrity, and collaboration in digital transformation.">
@@ -17,17 +16,6 @@ import abstractImage from "../assets/webp/abstract-poly.webp";
     <p slot="left">
 		We believe the future is being built where the intersection of digital technologies and human expertise will empower solutions that will redefine what’s possible.
 	</p>
-    <ImageBlock
-      slot="right"
-      src={abstractImage}
-      alt=""
-      width="1359"
-      height="750"
-      loading="eager"
-      class="right-image"
-      layout="full-width"
-      priority
-    />
   </TwoColumn>
   <OneColumn
     title="about"

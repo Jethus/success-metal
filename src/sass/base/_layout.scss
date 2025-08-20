@@ -1,4 +1,4 @@
-@use "../foundation/index" as *;
+@use '../foundation/index' as *;
 :root {
   @include fluid-font-sizes;
 }
@@ -9,6 +9,7 @@ html {
 
 body {
   container-type: inline-size;
+  background-color: $dark;
 }
 
 body,
@@ -42,6 +43,10 @@ textarea {
     padding-inline: 0;
   }
   &.full-width {
+    grid-column: 1/-1;
+    padding-inline: 0;
+  }
+  &.expanded {
     grid-column: 2/-1;
     padding-inline: 0;
   }

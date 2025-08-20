@@ -3,21 +3,18 @@ export type Props = {
   title?: string;
   heading?: "h1" | "h2";
   id: string;
+  width?: "full-width" | "expanded";
 };
 
-const { title, heading, id } = Astro.props;
+const { title, heading, id, width } = Astro.props;
 ---
 
 <section id={id}>
-  <div class="container">
+  <div class={`container${width ? ` ${width}` : ''}`}>
     <div class="flex-group-col">
       {title && heading === "h1" && <h1>{title}</h1>}
       {title && heading === "h2" && <h2>{title}</h2>}
       <slot />
     </div>
   </div>
-
-  <style lang="scss">
-    @use "@styles" as *;
-  </style>
 </section>

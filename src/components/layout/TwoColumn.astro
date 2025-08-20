@@ -4,14 +4,14 @@ export type Props = {
   heading?: "h1" | "h2";
   id: string;
   reverse?: boolean;
-  fullWidth?: boolean;
+  width?: "full-width" | "expanded";
 };
 
-const { title, heading, id, reverse = false, fullWidth = false } = Astro.props;
+const { title, heading, id, reverse = false, width} = Astro.props;
 ---
 
 <section id={id} class={`two-col ${reverse ? "reverse" : ""}`}>
-  <div class={`container ${fullWidth ? "full-width" : ""}`}>
+    <div class={`container${width ? ` ${width}` : ''}`}>
     <div class="flex-group-col left-side">
       {title && heading === "h1" && <h1>{title}</h1>}
       {title && heading === "h2" && <h2>{title}</h2>}

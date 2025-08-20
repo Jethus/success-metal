@@ -1,10 +1,12 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { Image } from "astro:assets";
-import logo from "../../assets/svgs/CS-logo.svg";
+import logo from "../../assets/svgs/success-metal-logo.svg";
 ---
 
 <header>
+  <div class="backdrop"></div>
+  <div class="backdrop-edge"></div>
   <nav id="nav">
     <a href="/" class="logo" aria-label="back to home">
       <Image
@@ -17,8 +19,11 @@ import logo from "../../assets/svgs/CS-logo.svg";
     </a>
     <div class="desktop-links">
       <HeaderLink href="/about">About</HeaderLink>
+      <HeaderLink href="/gallery">Gallery</HeaderLink>
       <HeaderLink href="/services">Services</HeaderLink>
-      <HeaderLink id="contact" href="/contact">Contact Us</HeaderLink>
+      <span id="contact">
+      <HeaderLink href="/contact">Contact Us</HeaderLink> | <HeaderLink href="tel:6137909112">(613) 790-9112</HeaderLink>
+      </span>
     </div>
 
     <button
@@ -28,7 +33,6 @@ import logo from "../../assets/svgs/CS-logo.svg";
       aria-controls="mobile-nav"
       aria-expanded="false"
     >
-      <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -53,67 +57,112 @@ import logo from "../../assets/svgs/CS-logo.svg";
     right: 0;
     z-index: 99;
   }
-  // mobile header, with shrink effect
+
+  .backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 200%;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+    mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
+    pointer-events: none;
+
+    @supports (
+      mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%)
+    ) {
+      mask-image: linear-gradient(
+        to bottom,
+        black 0% 50%,
+        transparent 50% 100%
+      );
+    }
+
+    @supports not (
+      mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%)
+    ) {
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+  }
+
+  .backdrop-edge {
+    $thickness: 2px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    transform: translateY(100%);
+    pointer-events: none;
+
+    @supports (
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black 0,
+          black $thickness,
+          transparent $thickness
+        )
+    ) {
+      backdrop-filter: blur(8px) brightness(120%);
+      -webkit-backdrop-filter: blur(8px) brightness(120%);
+      background: hsl(0deg 0% 100% / 0.1);
+      mask-image: linear-gradient(
+        to bottom,
+        black 0,
+        black $thickness,
+        transparent $thickness
+      );
+    }
+
+    @supports not (
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black 0,
+          black $thickness,
+          transparent $thickness
+        )
+    ) {
+      display: none;
+    }
+  }
+
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: .75rem 1.25rem;
-    background: $light;
+    padding: 1.5rem 2rem;
     box-shadow: 0 2px 4px rgba($dark, 0.12);
-    transform: scaleX(1) translateY(0);
-    transform-origin: top center;
     margin-inline: auto;
     border-radius: 0;
-    will-change: transform;
-    overflow-anchor: none;
-    @include transition-slow(transform, width, padding, box-shadow, border-radius);
+    position: relative;
+    z-index: 2;
     .logo {
-      @include transition-slow(height);
       height: 40px;
         img {
-      @include transition-slow(height);
           width: auto;
           height: 40px;
         }
     }
-    &.is-shrunk {
-      transform: scale(0.94) translateY(2rem);
-      width: calc(100% - 2rem);
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
-      box-shadow: 0 4px 8px rgba($dark, 0.12);
-
-      .logo,
-      .desktop-links,
-      .hamburger,
-      #contact {
-        transform: scale(0.9);
-      }
-      .hamburger {
-        &:hover,
-        &:focus-visible {
-          animation: breathe-sm 2s ease-in-out infinite;
-        }
-      }
-    }
     .desktop-links {
       display: none;
-    }
-    .logo,
-    .desktop-links,
-    .hamburger,
-    #contact {
-      transform: scale(1);
-      transition: transform 0.35s ease;
     }
   }
 
   // burger menu style, variables to ensure lines are square
-  $hamburger-width: 40px;
-  $hamburger-height: 24px;
-  $patty-height: 4px;
+  $hamburger-width: 56px;
+  $hamburger-height: 32px;
+  $patty-height: 5px;
   .hamburger {
     display: flex;
     flex-direction: column;
@@ -136,7 +185,7 @@ import logo from "../../assets/svgs/CS-logo.svg";
       position: absolute;
       height: $patty-height;
       width: 100%;
-      background: $brand-primary;
+      background: $light;
       border-radius: 8px;
       @include transition-slow(all);
       &:nth-child(1) {
@@ -145,37 +194,28 @@ import logo from "../../assets/svgs/CS-logo.svg";
         );
       }
 
-      &:nth-child(2),
-      &:nth-child(3) {
+      &:nth-child(2) {
         transform: translateY(0);
         width: 75%;
+        align-self: flex-end;
       }
 
-      &:nth-child(4) {
+      &:nth-child(3) {
         transform: translateY(calc(($hamburger-height - $patty-height) / 2));
       }
     }
 
     &.open span {
       &:nth-child(1) {
-        transform: translateY(0) translateX(calc($hamburger-width / 2));
-        width: 0%;
-        transform-origin: top center;
-      }
-      &:nth-child(2),
-      &:nth-child(3) {
-        width: 100%;
+        transform: rotate(45deg);
       }
       &:nth-child(2) {
-        transform: rotate(45deg);
+        transform: translateX(-4rem);
+        opacity: 0;
       }
       &:nth-child(3) {
         transform: rotate(-45deg);
-      }
-      &:nth-child(4) {
-        transform: translateY(0) translateX(calc($hamburger-width / 2));
-        width: 0%;
-        transform-origin: top center;
+
       }
     }
   }
@@ -184,15 +224,16 @@ import logo from "../../assets/svgs/CS-logo.svg";
   .mobile-links {
     display: flex;
     position: fixed;
+    background-color: rgba($dark, 0.8);
+    backdrop-filter: blur(0.25rem);
     font-size: var(--font-size-md);
     inset-block-start: 0;
     inset-inline-end: 0;
-    width: 35vw;
+    width: 100%;
     min-width: 200px;
     height: 100vh;
     padding-top: 5rem;
     align-items: flex-end;
-    background: $light;
     font-weight: $bold;
     flex-direction: column;
     gap: 0.25rem;
@@ -213,48 +254,20 @@ import logo from "../../assets/svgs/CS-logo.svg";
       @include transition-fast(background-color);
       &:hover,
       &:focus-visible {
-        background-color: $off-white-bg;
+        background-color: $secondary-bg;
       }
     }
   }
-
-  // Undo the shrink effects when mobile menu is open
-  nav:has([data-visible="true"]) {
-    transform: scale(1) translateY(0);
-    width: 100%;
-    border-radius: 0;
-    padding: .75rem 1.25rem;
-    .logo,
-    .desktop-links,
-    .hamburger,
-    #contact {
-      transform: scale(1);
-    }
-    .hamburger {
-      &:hover,
-      &:focus-visible {
-        animation: breathe-full 2s ease-in-out infinite;
-      }
-    }
-  }
-
 
   // tablet style adjustments
   @include container-query(tablets) {
     nav {
-      padding: 1.5rem 2rem;
+      padding: 2rem 2.5rem;
       .logo {
-        height: 44px;
+        height: 50px;
         & img {
-          height: 44px;
+          height: 50px;
         }
-      }
-      &.is-shrunk {
-        transform: scale(0.94) translateY(2rem);
-        width: calc(100% - 4rem);
-        border-radius: 2rem;
-        box-shadow: 0 4px 8px rgba($dark, 0.12);
-        padding: 1rem 1.5rem;
       }
       .desktop-links {
         display: flex;
@@ -266,9 +279,6 @@ import logo from "../../assets/svgs/CS-logo.svg";
         }
         font-weight: bold;
       }
-      #contact {
-        @include btn-base;
-      }
       .hamburger,
       .mobile-links {
         display: none;
@@ -278,9 +288,9 @@ import logo from "../../assets/svgs/CS-logo.svg";
   @include container-query(small-laptop) {
     nav {
       .logo {
-        height: 50px;
+        height: 60px;
         & img {
-          height: 50px;
+          height: 60px;
         }
       }
       .desktop-links {
@@ -294,25 +304,6 @@ import logo from "../../assets/svgs/CS-logo.svg";
 </style>
 
 <script is:inline>
-  const nav = document.getElementById("nav");
-  const shrink_threshold = 50;
-  const expand_threshold = 20;
-  let isShrunk = false;
-
-  const onScroll = () => {
-    const y = window.scrollY;
-    if (!isShrunk && y > shrink_threshold) {
-      nav.classList.add("is-shrunk");
-      isShrunk = true;
-    } else if (isShrunk && y <= expand_threshold) {
-      nav.classList.remove("is-shrunk");
-      isShrunk = false;
-    }
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
   const toggle = document.getElementById("nav-toggle");
   const mobileMenu = document.getElementById("mobile-nav");
 

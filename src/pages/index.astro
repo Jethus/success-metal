@@ -5,8 +5,14 @@ import Footer from "../components/navigation/Footer.astro";
 import ClosingCTA from "../components/sections/ClosingCTA.astro";
 import Hero from "../components/sections/Hero.astro";
 import Solutions from "../components/sections/Solutions.astro";
-import Services from "../components/sections/Services.astro";
+import ServiceFeature from '../components/sections/ServiceFeature.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+import { getCollection } from 'astro:content';
+import OneColumn from "../components/layout/OneColumn.astro";
+const services = (await getCollection('services')).sort(
+  (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity)
+);
 ---
 
 <!doctype html>
@@ -19,9 +25,37 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     <main>
       <Hero />
       <Solutions />
-      <Services />
+      <OneColumn id="services" width="full-width">
+        <ul>
+          {services.map(service => (
+            <li>
+              <ServiceFeature {...service.data} />
+            </li>
+          ))}
+        </ul>
+      </OneColumn>
     </main>
     <ClosingCTA />
     <Footer />
   </body>
 </html>
+
+<style lang="scss" is:global>
+  @use "@styles" as *;
+
+  #services {
+    padding: 0;
+    .container {
+      .flex-group-col {
+        ul {
+          width: 100%;
+          list-style: none;
+          padding: 0;
+          li {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+</style>

@@ -1,38 +1,58 @@
-@use "../foundation/index" as *;
+@use '../foundation/index' as *;
 
 /* Fonts and general styles */
-/* lato-700 - latin */
+/* roboto-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/lato-v24-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-900 - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 900;
-  src: url("../fonts/lato-v24-latin-900.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* noto-sans-regular - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Noto Sans";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/noto-sans-v39-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/fonts/roboto-v48-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* noto-sans-500 - latin */
+
+/* roboto-700 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Noto Sans";
+  font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/noto-sans-v39-latin-500.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-weight: 700;
+  src: url('/fonts/roboto-v48-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-condensed-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/roboto-condensed-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-condensed-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/roboto-condensed-v30-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/inter-v19-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-900 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  src: url('/fonts/inter-v19-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 body,
@@ -82,34 +102,48 @@ h5 {
   line-height: $line-height;
 }
 
-a:not([class*="btn"]):not([class*="logo"]) {
+a {
   color: $brand-action;
-  text-decoration: none;
   position: relative;
-  @include transition-fast(color);
+  text-decoration: none;
+  @include transition-fast(transform, color);
   &:hover {
-    color: $brand-primary;
-    &::before {
-      transform-origin: left;
+    color: $brand-primary !important;
+    &::after {
       transform: scaleX(1);
+    }
+    svg {
+      fill: $brand-primary !important;
     }
   }
   &:focus-visible {
     outline: 2px solid $brand-action;
   }
 
-  &::before {
-    content: "";
+  &::after {
+    content: '';
     position: absolute;
     width: 100%;
     height: 2px;
     border-radius: 4px;
     background-color: $brand-primary;
-    bottom: 0;
+    bottom: 2px;
     left: 0;
-    transform-origin: right;
+    transform-origin: left;
     transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
+    @include transition-slow(transform);
+  }
+}
+
+a.logo,
+a.skip,
+a[class*='btn'],
+a[class*='astro-lightgallery'] {
+  color: inherit;
+  text-decoration: inherit;
+  position: static;
+  &::after {
+    display: none;
   }
 }
 
@@ -125,7 +159,12 @@ ul {
   top: calc(120px + 2rem); // Mindful of nav
   z-index: 2;
   background: inherit;
-  @include container-query(tablets) {
-    top: calc(120px + 3rem);
-  }
+}
+
+.topper {
+  font-family: $alternate-font;
+  font-weight: $bold;
+  color: $brand-topper;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
 }
