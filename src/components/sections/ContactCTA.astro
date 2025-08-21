@@ -1,0 +1,42 @@
+---
+import ContactForm from "../interactive/ContactForm.astro";
+
+export type ClosingCTAProps = {
+  title?: string;
+};
+
+const { title = "Ready to elevate your business?" } =
+  Astro.props as ClosingCTAProps;
+---
+
+<section id="ContactCTA">
+  <div class="container">
+    <div class="flex-group-col">
+      <h2 class="title">{title}</h2>
+      <p>
+        <slot>
+          Get a quote in 24 hours and keep your project moving. Call us at <a
+            href="tel:6137909112">(613) 790-9112</a
+          > or send your specs through our form.
+        </slot>
+      </p>
+    </div>
+    <ContactForm />
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles" as *;
+  #ContactCTA {
+    background-color: $main-bg;
+    padding: 0;
+    .container {
+      flex-direction: row;
+      .flex-group-col {
+        padding: 2rem $gutter;
+        justify-content: center;
+        align-items: flex-start;
+      }
+    }
+  }
+</style>

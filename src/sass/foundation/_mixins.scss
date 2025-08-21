@@ -168,6 +168,11 @@
   outline-offset: 6px;
 }
 
+@mixin border-style {
+  border: 1px solid $brand-primary;
+  border-left: 4px solid $brand-primary;
+}
+
 // Transitions
 @mixin transition-fast($properties...) {
   $transitions: ();
