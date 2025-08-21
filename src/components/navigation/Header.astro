@@ -22,7 +22,9 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
       <HeaderLink href="/gallery">Gallery</HeaderLink>
       <HeaderLink href="/services">Services</HeaderLink>
       <span id="contact">
-      <HeaderLink href="/contact">Contact Us</HeaderLink> | <HeaderLink href="tel:6137909112">(613) 790-9112</HeaderLink>
+        <HeaderLink href="/contact">Contact Us</HeaderLink> | <HeaderLink
+          href="tel:6137909112">(613) 790-9112</HeaderLink
+        >
       </span>
     </div>
 
@@ -56,6 +58,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
     left: 0;
     right: 0;
     z-index: 99;
+    background-color: rgba($dark, 0.25);
   }
 
   .backdrop {
@@ -104,8 +107,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
     pointer-events: none;
 
     @supports (
-      mask-image:
-        linear-gradient(
+      mask-image: linear-gradient(
           to bottom,
           black 0,
           black $thickness,
@@ -124,8 +126,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
     }
 
     @supports not (
-      mask-image:
-        linear-gradient(
+      mask-image: linear-gradient(
           to bottom,
           black 0,
           black $thickness,
@@ -149,10 +150,10 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
     z-index: 2;
     .logo {
       height: 40px;
-        img {
-          width: auto;
-          height: 40px;
-        }
+      img {
+        width: auto;
+        height: 40px;
+      }
     }
     .desktop-links {
       display: none;
@@ -215,7 +216,6 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
       }
       &:nth-child(3) {
         transform: rotate(-45deg);
-
       }
     }
   }
@@ -240,7 +240,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
     transform: translateX(120%);
     @include transition-slow(transform, box-shadow);
     box-shadow: none;
-    text-align:right;
+    text-align: right;
     z-index: 10;
 
     &[data-visible="true"] {
@@ -275,7 +275,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
         gap: 2.5rem;
         font-size: var(--font-size-base-md);
         #contact {
-        font-size: var(--font-size-base-md);
+          font-size: var(--font-size-base-md);
         }
         font-weight: bold;
       }

@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+export type PartnerImage = { src: any; name: string };
+export type PartnerProps = {
+  topper?: string;
+  heading: string;
+  description?: string;
+  images: PartnerImage[];
+};
+
+const {
+  topper = "Our Partners",
+  heading = "Trusted by Industry Leaders",
+  description,
+  images,
+} = Astro.props as PartnerProps;
+---
+
+<section id="partners">
+  <div class="container">
+    <div class="flex-text">
+      <p class="topper">{topper}</p>
+      <h2>{heading}</h2>
+    </div>
+    {description ? <p class="description">{description}</p> : null}
+    <div class="partners-logos" role="list">
+      {
+        images.map((img, i) => (
+          <div class="logo-item" role="listitem">
+            <Image
+              src={img.src}
+              width={250}
+              height={120}
+              alt={img.name}
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles" as *;
+  #partners {
+    text-align: center;
+    background: $main-bg;
+    .container {
+      gap: 2rem;
+      .flex-text {
+        margin-bottom: 2rem;
+        .description {
+          color: $light;
+        }
+      }
+      .partners-logos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem 0;
+        justify-items: center;
+      }
+      .logo-item {
+        display: flex;
+        img {
+          max-width: 550px;
+          width: auto;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+</style>

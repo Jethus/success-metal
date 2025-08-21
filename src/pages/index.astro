@@ -2,17 +2,41 @@
 import BaseHead from "../components/navigation/BaseHead.astro";
 import Header from "../components/navigation/Header.astro";
 import Footer from "../components/navigation/Footer.astro";
+import OneColumn from "../components/layout/OneColumn.astro";
 import ClosingCTA from "../components/sections/ClosingCTA.astro";
 import Hero from "../components/sections/Hero.astro";
 import Solutions from "../components/sections/Solutions.astro";
-import ServiceFeature from '../components/sections/ServiceFeature.astro';
+import ServiceFeature from "../components/sections/ServiceFeature.astro";
+import Partners from "../components/sections/Partners.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
-import { getCollection } from 'astro:content';
-import OneColumn from "../components/layout/OneColumn.astro";
-const services = (await getCollection('services')).sort(
+import loblaws from "../assets/svgs/partners/loblaws.svg";
+import gayLea from "../assets/svgs/partners/gay-lea.svg";
+import fgf from "../assets/svgs/partners/fgf.svg";
+import mercedes from "../assets/svgs/partners/mercedes-benz.svg";
+import iko from "../assets/svgs/partners/iko.svg";
+import wonderbrands from "../assets/svgs/partners/wonderbrands.svg";
+
+import { getCollection, render } from "astro:content";
+const services = (await getCollection("services")).sort(
   (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity)
 );
+
+const rendered = await Promise.all(
+  services.map(async (item) => {
+    const { Content } = await render(item);
+    return { data: item.data, Content };
+  })
+);
+
+const partners = [
+  { src: loblaws, name: "Loblaws" },
+  { src: gayLea, name: "Gay Lea" },
+  { src: fgf, name: "FGF" },
+  { src: mercedes, name: "Mercedes-Benz" },
+  { src: iko, name: "IKO" },
+  { src: wonderbrands, name: "Wonderbrands" },
+];
 ---
 
 <!doctype html>
@@ -27,13 +51,18 @@ const services = (await getCollection('services')).sort(
       <Solutions />
       <OneColumn id="services" width="full-width">
         <ul>
-          {services.map(service => (
-            <li>
-              <ServiceFeature {...service.data} />
-            </li>
-          ))}
+          {
+            rendered.map(({ data, Content }) => (
+              <li>
+                <ServiceFeature {...data}>
+                  <Content />
+                </ServiceFeature>
+              </li>
+            ))
+          }
         </ul>
       </OneColumn>
+      <Partners images={partners} />
     </main>
     <ClosingCTA />
     <Footer />

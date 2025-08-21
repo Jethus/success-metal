@@ -1,23 +1,28 @@
 ---
 import ImageBlock from "../primitives/ImageBlock.astro";
 import closingCta from "../../assets/svgs/closing-cta.svg";
+
+export type ClosingCTAProps = {
+  title?: string;
+  description?: string;
+  link?: string;
+  cta?: string;
+};
+
+const {
+  title = "Ready to elevate your business?",
+  description = "Book a free discovery session with no strings attached.",
+  link = "/contact",
+  cta = "Contact Us",
+} = Astro.props as ClosingCTAProps;
 ---
 
 <section id="ClosingCTA">
   <div class="container full-width">
     <div class="flex-group-col">
-      <h2 class="title">
-        {Astro.props.title ?? "Ready to elevate your business?"}
-      </h2>
-      <p>
-        {
-          Astro.props.description ??
-            "Book a free discovery session with no strings attached."
-        }
-      </p>
-      <a class="btn-secondary" href={Astro.props.link ?? "/contact"}>
-        {Astro.props.cta ?? "Contact Us"}
-      </a>
+      <h2 class="title">{title}</h2>
+      <p>{description}</p>
+      <a class="btn-secondary" href={link}>{cta}</a>
     </div>
     <ImageBlock
       src={closingCta}
@@ -27,10 +32,8 @@ import closingCta from "../../assets/svgs/closing-cta.svg";
       height={600}
       loading="lazy"
     />
-
     <style lang="scss">
       @use "@styles" as *;
-
       #ClosingCTA {
         background-color: $brand-action;
         padding: 0;
