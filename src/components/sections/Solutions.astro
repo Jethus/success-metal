@@ -96,8 +96,9 @@ import high_volume from "../../assets/svgs/high-volume.svg";
           flex: 0 0 35%;
           width: 100%;
           img {
+            @include transition-fast(height);
             width: auto;
-            height: auto;
+            height: 80px;
           }
         }
       }
@@ -114,8 +115,26 @@ import high_volume from "../../assets/svgs/high-volume.svg";
         }
       }
     }
+    @include container-query(large-mobile) {
+      .container {
+        .flex-group-row {
+          .certs {
+            img {
+              height: 100px;
+            }
+          }
+        }
+      }
+    }
     @include container-query(tablets) {
       .container {
+        .flex-group-row {
+          .certs {
+            img {
+              height: 120px;
+            }
+          }
+        }
       }
     }
     @include container-query(small-laptop) {
