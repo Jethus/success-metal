@@ -77,7 +77,7 @@ import high_volume from "../../assets/svgs/high-volume.svg";
   </div>
 </section>
 
-<style lang="scss">
+<style lang="scss" is:global>
   @use "@styles" as *;
 
   #solutions {
@@ -107,6 +107,11 @@ import high_volume from "../../assets/svgs/high-volume.svg";
         gap: 2rem;
         list-style-type: none;
         padding: 0;
+        .card-content {
+          ul {
+            list-style: disc;
+          }
+        }
       }
     }
     @include container-query(tablets) {
