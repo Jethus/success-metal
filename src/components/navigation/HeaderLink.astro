@@ -17,6 +17,9 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
   a {
     display: inline-block;
     color: $light;
+    &:hover {
+      color: $brand-primary;
+    }
   }
   a.active {
     color: $brand-primary;

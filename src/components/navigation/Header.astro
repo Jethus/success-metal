@@ -18,9 +18,8 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
       />
     </a>
     <div class="desktop-links">
-      <HeaderLink href="/about">About</HeaderLink>
       <HeaderLink href="/gallery">Gallery</HeaderLink>
-      <HeaderLink href="/services">Services</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
       <span id="contact">
         <HeaderLink href="/contact">Contact Us</HeaderLink> | <HeaderLink
           href="tel:6137909112">(613) 790-9112</HeaderLink
@@ -40,8 +39,8 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
       <span aria-hidden="true"></span>
     </button>
     <div id="mobile-nav" class="mobile-links" data-visible="false">
+      <HeaderLink href="/gallery">Gallery</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/services">Services</HeaderLink>
       <HeaderLink href="/contact">Contact Us</HeaderLink>
     </div>
   </nav>
@@ -232,7 +231,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
     width: 100%;
     min-width: 200px;
     height: 100vh;
-    padding-top: 5rem;
+    padding-top: 6rem;
     align-items: flex-end;
     font-weight: $bold;
     flex-direction: column;
@@ -260,7 +259,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
   }
 
   // tablet style adjustments
-  @include container-query(tablets) {
+  @include container-query(small-laptop) {
     nav {
       padding: 2rem 2.5rem;
       .logo {
@@ -285,7 +284,7 @@ import logo from "../../assets/svgs/success-metal-logo.svg";
       }
     }
   }
-  @include container-query(small-laptop) {
+  @include container-query(large-laptop) {
     nav {
       .logo {
         height: 60px;

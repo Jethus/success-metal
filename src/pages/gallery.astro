@@ -1,33 +1,39 @@
 ---
 import Layout from "../layouts/Basic.astro";
 import OneColumn from "../components/layout/OneColumn.astro";
-import { LightGallery } from 'astro-lightgallery';
-import ClosingCTA from "../components/sections/ClosingCTA.astro";
+import { LightGallery } from "astro-lightgallery";
+import ContactCTA from "../components/sections/ContactCTA.astro";
 
 const galleryImages = Object.values(
-  import.meta.glob<{ default: ImageMetadata }>("../assets/gallery/*.{jpg,png,webp}", { eager: true })
+  import.meta.glob<{ default: ImageMetadata }>(
+    "../assets/gallery/*.{jpg,png,webp}",
+    { eager: true }
+  )
 ).map((mod) => mod.default);
 ---
 
-<Layout
-  title="Our Work"
-  description="View our projects"
->
-  <OneColumn title="Gallery" heading="h1" id="gallery" >
+<Layout title="Our Work" description="View our projects">
+  <OneColumn title="Gallery" heading="h1" id="gallery">
     <p>
-      Explore our gallery to see examples of our precision fabrication and custom metalwork. Each image showcases our commitment to quality, advanced technology, and attention to detail across a range of projects. Discover how our expertise brings ideas to life for clients in Ontario and beyond.
+      Explore our gallery to see examples of our precision fabrication and
+      custom metalwork. Each image showcases our commitment to quality, advanced
+      technology, and attention to detail across a range of projects. Discover
+      how our expertise brings ideas to life for clients in Ontario and beyond.
     </p>
     <LightGallery
       layout={{
-        imgs: galleryImages.map(img => ({ src: img.src, width: img.width, height: img.height }))
+        imgs: galleryImages.map((img) => ({
+          src: img.src,
+          width: img.width,
+          height: img.height,
+        })),
       }}
       options={{
         thumbnail: true,
       }}
-    >
-    </LightGallery>
+    />
   </OneColumn>
-  <ClosingCTA/>
+  <ContactCTA />
 </Layout>
 
 <style lang="scss" is:global>
@@ -41,7 +47,7 @@ const galleryImages = Object.values(
     .astro-lightgallery-adaptive-item {
       $smooth: 4px;
       position: relative;
-        @include transition-fast(transform);
+      @include transition-fast(transform);
       img {
         border-radius: $smooth;
       }

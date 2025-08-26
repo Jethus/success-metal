@@ -28,14 +28,24 @@ const { title = "Ready to elevate your business?" } =
 <style lang="scss">
   @use "@styles" as *;
   #ContactCTA {
-    background-color: $main-bg;
+    background-color: $secondary-bg;
     padding: 0;
     .container {
-      flex-direction: row;
+      flex-direction: column;
+      padding-block: 2rem;
       .flex-group-col {
         padding: 2rem $gutter;
         justify-content: center;
         align-items: flex-start;
+        flex: 0 0 40%;
+      }
+    }
+    @include container-query(tablets) {
+      .container {
+        flex-direction: row;
+        .flex-group-col {
+          flex: 0 0 50%;
+        }
       }
     }
   }

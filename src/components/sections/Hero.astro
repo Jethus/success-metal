@@ -1,24 +1,35 @@
 ---
-import ImageBlock from "../primitives/ImageBlock.astro"
-import heroImage from "../../assets/webp/hero.webp"
+import ImageBlock from "../primitives/ImageBlock.astro";
+import heroImage from "../../assets/webp/hero.webp";
 ---
 
 <section id="hero">
   <div class="container">
     <div class="flex-group-col">
       <h1>
-        Custom Metal Products.<br>
+        Custom Metal Products.<br />
         <span>Proven Fabrication Expertise.</span>
       </h1>
       <div class="flex-text">
         <p class="topper">Leading in North America</p>
         <p>
-          Specialized in creating finished products for large manufacturing industries - from custom components to high-volume production support.
-        </p> 
+          Specialized in creating finished products for large manufacturing
+          industries - from custom components to high-volume production support.
+        </p>
       </div>
       <div class="flex-group-row">
-        <a href="/contact " class="btn-primary">Custom Quote 
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 15 15"><path fill="currentColor" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414"/></svg>
+        <a href="/contact " class="btn-primary"
+          >Custom Quote
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            viewBox="0 0 15 15"
+            ><path
+              fill="currentColor"
+              d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414"
+            ></path></svg
+          >
         </a>
         <a href="/gallery" class="btn-secondary">See our work</a>
       </div>
@@ -32,15 +43,17 @@ import heroImage from "../../assets/webp/hero.webp"
 
   #hero {
     container-type: inline-size;
-    background: $dark;
     position: relative;
-    grid-template-columns: 1fr minmax(0, 800px) minmax(0, 800px) 1fr;
-    .container {
-      flex-direction: column-reverse;
+    grid-template-columns: 1fr (minmax(0, 800px)) (minmax(0, 800px)) 1fr;
+    @include container-query(1440px) {
+      .container {
+        padding-inline: $gutter;
+      }
     }
     .flex-group-col {
       align-items: flex-start;
-      padding: 8rem 0;
+      padding: 4rem 0;
+      max-width: 100%;
       h1 {
         font-size: var(--font-size-xxxl);
         line-height: 1.4;
@@ -49,7 +62,7 @@ import heroImage from "../../assets/webp/hero.webp"
         margin-bottom: 4rem;
         span {
           color: $brand-primary;
-          white-space: nowrap;
+          white-space: wrap;
         }
       }
       .topper ~ p {
@@ -78,25 +91,21 @@ import heroImage from "../../assets/webp/hero.webp"
         opacity: 0.33;
       }
     }
-      @include container-query(large-mobile) {
+    @include container-query(tablets) {
       .flex-group-col {
+        h1 {
+          span {
+            white-space: nowrap;
+          }
+        }
         .flex-group-row {
           flex-direction: row;
         }
       }
-      .hero-image {
-      }
     }
     @include container-query(small-laptop) {
-      .container {
-        flex-direction: row;
-      }
-      align-items: center;
-
       .flex-group-col {
-        flex: 0 0 75%;
-      }
-      .hero-image {
+        max-width: 80%;
       }
     }
   }

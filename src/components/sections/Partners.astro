@@ -56,16 +56,51 @@ const {
       }
       .partners-logos {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 4rem 0;
         justify-items: center;
       }
       .logo-item {
         display: flex;
+        width: 100%;
+        justify-content: center;
         img {
-          max-width: 550px;
-          width: auto;
+          max-width: 75%;
+          width: 100%;
+          max-height: 90px;
+          height: auto;
           object-fit: contain;
+          @include transition-fast(max-width);
+        }
+      }
+    }
+    @include container-query(small-laptop) {
+      .container {
+        .partners-logos {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .logo-item {
+          img {
+            max-width: 450px;
+          }
+        }
+      }
+    }
+    @include container-query(large-laptop) {
+      .container {
+        .logo-item {
+          img {
+            max-width: 500px;
+          }
+        }
+      }
+    }
+    @include container-query(desktop) {
+      .container {
+        .logo-item {
+          img {
+            max-width: 550px;
+          }
         }
       }
     }

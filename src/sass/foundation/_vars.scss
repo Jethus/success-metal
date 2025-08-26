@@ -1,9 +1,9 @@
 // Variables used across multiple file types
 // Basic utility mixins that cause conflicts
 // Core design tokens
-@use 'sass:list';
-@use 'sass:math';
-@use 'sass:map';
+@use "sass:list";
+@use "sass:math";
+@use "sass:map";
 
 // Helper functions
 
@@ -32,16 +32,25 @@ $breakpoints: (
   @return math.div(math.round($number * $n), $n);
 }
 
-$default-min-bp: map.get($breakpoints, 'large-mobile');
-$default-max-bp: map.get($breakpoints, 'desktop');
+$default-min-bp: map.get($breakpoints, "large-mobile");
+$default-max-bp: map.get($breakpoints, "desktop");
 
-@function clamped($min-px, $max-px, $min-bp: $default-min-bp, $max-bp: $default-max-bp) {
+@function clamped(
+  $min-px,
+  $max-px,
+  $min-bp: $default-min-bp,
+  $max-bp: $default-max-bp
+) {
   $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
   $slope-vw: rnd($slope * 100, 2);
   $intercept-rems: rnd(to-rems($min-px - $slope * $min-bp), 2);
   $min-rems: rnd(to-rems($min-px), 2);
   $max-rems: rnd(to-rems($max-px), 2);
-  @return clamp(#{$min-rems}, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rems});
+  @return clamp(
+    #{$min-rems},
+    #{$slope-vw}vw + #{$intercept-rems},
+    #{$max-rems}
+  );
 }
 
 // End helper functions
@@ -57,12 +66,12 @@ $gradient-bg: linear-gradient(to bottom left, #0c1526 0%, #0c1d3b 100%);
 $dark: #000;
 $light: #fff;
 
-$type-base-min: 18px;
+$type-base-min: 19px;
 $type-base-max: 21px;
 $type-scale-min: 1.125;
 $type-scale-max: 1.25;
-$type-steps: 'sm', 'base', 'base-md', 'md', 'lg', 'xl', 'xxl', 'xxxl';
-$type-base-index: list.index($type-steps, 'base');
+$type-steps: "sm", "base", "base-md", "md", "lg", "xl", "xxl", "xxxl";
+$type-base-index: list.index($type-steps, "base");
 
 /* 60px - 100px top and bottom */
 $container-padding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
@@ -77,11 +86,11 @@ $section-space: clamp(1.5rem, 8cqi, 3rem);
 $drop-shadow: 4px 4px 8px rgba($dark, 0.25);
 
 // Headings font
-$header-font: 'Inter', 'Arial', sans-serif;
+$header-font: "Inter", "Arial", sans-serif;
 // Body font
-$body-font: 'Roboto', 'Arial', sans-serif;
+$body-font: "Roboto", "Arial", sans-serif;
 // Alternate
-$alternate-font: 'Roboto Condensed', 'Arial', sans-serif;
+$alternate-font: "Roboto Condensed", "Arial", sans-serif;
 
 // Font weights
 $regular: 400;

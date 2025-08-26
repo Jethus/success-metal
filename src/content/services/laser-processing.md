@@ -1,6 +1,6 @@
 ---
 heading: Laser Processing
-image: "../../assets/webp/custom-forming.webp"
+image: "../../assets/webp/laser-processing.webp"
 order: 1
 specs:
   - label: Master Sheet Capacity

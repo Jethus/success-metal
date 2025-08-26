@@ -11,71 +11,66 @@ import high_volume from "../../assets/svgs/high-volume.svg";
 
 <section id="solutions" aria-labelledby="solutions-heading">
   <div class="container">
-    <div class="flex-text">  
+    <div class="flex-text">
       <p class="topper">Our Services</p>
       <h2 id="solutions-heading">Manufacturing Solutions at Scale</h2>
     </div>
     <div class="flex-group-row">
       <p>
-        We specialize in creating finished goods for all industries, at a competitive price, with high volume capabilities to support other large manufacturing industries with parts which are not in their wheel house.
+        We specialize in creating finished goods for all industries, at a
+        competitive price, with high volume capabilities to support other large
+        manufacturing industries with parts which are not in their wheel house.
       </p>
       <div class="certs">
-      <Image 
-        src={ontario_cert}
-        alt="Ontario Made"
-        width={150}
-        height={150}
-      />
-      <Image 
-        src={cwb_cert}
-        alt="Certification CWB, CSA W47.1"
-        width={150}
-        height={150}
-
-      />
-      <Image 
-        src={iso_cert}
-        alt="ISO 9001:2015"
-        width={150}
-        height={150}
-      />
+        <Image src={ontario_cert} alt="Ontario Made" width={100} height={100} />
+        <Image
+          src={cwb_cert}
+          alt="Certification CWB, CSA W47.1"
+          width={100}
+          height={100}
+        />
+        <Image src={iso_cert} alt="ISO 9001:2015" width={100} height={100} />
+      </div>
     </div>
-    </div>  
-      <ul class="service-cards">
+    <ul class="service-cards">
       <li>
-        <CardIcon
-          icon={fabricate}
-          title="Custom Fabrication">
-        <p>From half-inch thick base plates to complex laser-cut items for your production line, we manufacture the custom pieces you need.</p>
-        <ul>
-          <li>Laser Cutting</li>
-          <li>CNC Machining</li>
-          <li>Shearing</li>
-        </ul>
+        <CardIcon icon={fabricate} title="Custom Fabrication">
+          <p>
+            From half-inch thick base plates to complex laser-cut items for your
+            production line, we manufacture the custom pieces you need.
+          </p>
+          <ul>
+            <li>Laser Cutting</li>
+            <li>CNC Machining</li>
+            <li>Shearing</li>
+          </ul>
         </CardIcon>
       </li>
       <li>
-        <CardIcon
-          icon={high_volume}
-          title="High Volume Manufacturing">
-        <p>Whether you need one custom item or thousands, our certified welders and advanced equipment to support your production requirements on any scale.</p>
-        <ul>
-          <li>Production Lines</li>
-          <li>Quality Control</li>
-          <li>Just-in-Time Delivery</li>
-        </ul>
+        <CardIcon icon={high_volume} title="High Volume Manufacturing">
+          <p>
+            Whether you need one custom item or thousands, our certified welders
+            and advanced equipment to support your production requirements on
+            any scale.
+          </p>
+          <ul>
+            <li>Production Lines</li>
+            <li>Quality Control</li>
+            <li>Just-in-Time Delivery</li>
+          </ul>
         </CardIcon>
       </li>
       <li>
-        <CardIcon
-          icon={finishing}
-          title="Finishing Services">
-        <p>We offer a complete range of finishing solutions to deliver production-ready components that meet your exact specifications.</p>
-        <ul>
-          <li>Powder Coating</li>
-          <li>Galvanizing</li>
-          <li>Assembly & Quality Control</li>
-        </ul>
+        <CardIcon icon={finishing} title="Finishing Services">
+          <p>
+            We offer a complete range of finishing solutions to deliver
+            production-ready components that meet your exact specifications.
+          </p>
+          <ul>
+            <li>Powder Coating</li>
+            <li>Galvanizing</li>
+            <li>Assembly & Quality Control</li>
+          </ul>
         </CardIcon>
       </li>
     </ul>
@@ -90,6 +85,7 @@ import high_volume from "../../assets/svgs/high-volume.svg";
     .container {
       > .flex-group-row {
         align-items: flex-start;
+        flex-direction: column;
         p {
           font-size: var(--font-size-base-md);
         }
@@ -98,17 +94,39 @@ import high_volume from "../../assets/svgs/high-volume.svg";
           flex-direction: row;
           gap: 2rem;
           flex: 0 0 35%;
+          width: 100%;
           img {
-            width:auto;
+            width: auto;
+            height: auto;
           }
         }
       }
       .service-cards {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 2rem;
         list-style-type: none;
         padding: 0;
+      }
+    }
+    @include container-query(tablets) {
+      .container {
+      }
+    }
+    @include container-query(small-laptop) {
+      .container {
+        > .flex-group-row {
+          flex-direction: row;
+          .certs {
+            img {
+              width: auto;
+              height: 150px;
+            }
+          }
+        }
+        .service-cards {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
     }
   }
